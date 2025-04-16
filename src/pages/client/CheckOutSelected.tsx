@@ -131,9 +131,6 @@ const CheckoutSelected: React.FC = () => {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/pemesananSelected`, 
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
                     body: JSON.stringify(orderData)
                 }
             );

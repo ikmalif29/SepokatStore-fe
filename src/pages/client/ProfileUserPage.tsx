@@ -153,7 +153,6 @@ const ProfileUserPage = () => {
         `${import.meta.env.VITE_API_BASE_URL}/api/users/update/${user.id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         }
       );

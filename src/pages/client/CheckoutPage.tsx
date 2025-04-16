@@ -90,9 +90,6 @@ const Checkout: React.FC = () => {
                 // Use the correct endpoint for pemesanan
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/pemesanan`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
                     body: JSON.stringify(orderData),
                 });
 
