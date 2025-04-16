@@ -68,9 +68,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/addcart`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
                 body: JSON.stringify({ id_user, id_barang, jumlah_barang }),
             });
 

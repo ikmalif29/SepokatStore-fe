@@ -56,9 +56,6 @@ const OrderHistoryController: React.FC = () => {
         `${import.meta.env.VITE_API_BASE_URL}/api/pemesanan/${orderId}/approve`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify({ status }),
         }
       );

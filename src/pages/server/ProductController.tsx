@@ -111,9 +111,7 @@ const ProductController: React.FC = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${updatedProduct.id}`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+
                 body: JSON.stringify({
                     nama_barang: updatedProduct.nama_barang,
                     harga: updatedProduct.harga,
@@ -125,14 +123,7 @@ const ProductController: React.FC = () => {
             });
 
             if (!response.ok) {
-                const contentType = response.headers.get("content-type");
-                let errorMessage = "Failed to update product";
-                if (contentType && contentType.includes("application/json")) {
-                    const errorData = await response.json();
-                    errorMessage = errorData.error || errorMessage;
-                } else {
-                    errorMessage = `Server returned ${response.status}: ${response.statusText}`;
-                }
+                const errorMessage = "Failed to update product";
                 throw new Error(errorMessage);
             }
 
@@ -164,9 +155,6 @@ const ProductController: React.FC = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
                 body: JSON.stringify({
                     nama_barang: newProduct.nama_barang,
                     harga: newProduct.harga,

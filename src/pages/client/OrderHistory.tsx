@@ -111,9 +111,6 @@ const OrderHistory: React.FC = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/pemesanan/${orderId}/bukti`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
                 body: JSON.stringify({ bukti_pemesanan: kode }),
             });
 
