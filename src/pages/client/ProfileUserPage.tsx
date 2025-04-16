@@ -133,27 +133,37 @@ const ProfileUserPage = () => {
     setUpdateLoading(true);
 
     try {
+      // Prepare the data to send to the API
       const updateData: Partial<User> = {
         username: formData.username,
         email: formData.email,
       };
-      if (formData.newPassword && formData.currentPassword) {
+      // Include password only if newPassword is provided
+      if (formData.newPassword) {
         updateData.password = formData.newPassword;
-        updateData.currentPassword = formData.currentPassword;
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/update/${user.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updateData),
-      });
+      // Create a payload that includes currentPassword if needed
+      const payload = {
+        ...updateData,
+        ...(formData.currentPassword && { currentPassword: formData.currentPassword }),
+      };
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/users/update/${user.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Failed to update profile");
 
       // Ensure the updatedUser object includes all required User properties
       const updatedUser: User = {
-        ...user, // Spread existing user to retain id, role, etc.
+        ...user,
         username: formData.username,
         email: formData.email,
         password: formData.newPassword || user.password, // Update password only if provided
@@ -206,7 +216,9 @@ const ProfileUserPage = () => {
   }
 
   return (
-    <main className={`${darkMode ? "dark bg-gray-900" : "bg-gray-100"} min-h-screen transition-colors duration-300`}>
+    <main
+      className={`${darkMode ? "dark bg-gray-900" : "bg-gray-100"} min-h-screen transition-colors duration-300`}
+    >
       <Header />
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <motion.div
@@ -238,7 +250,9 @@ const ProfileUserPage = () => {
                 />
               </motion.div>
               <div className="text-center sm:text-left">
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">{user.username}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">
+                  {user.username}
+                </h1>
                 <p className="text-indigo-600 dark:text-indigo-300 mt-1">{user.role}</p>
                 <p className="text-gray-600 dark:text-gray-400 mt-1">{user.email}</p>
               </div>
