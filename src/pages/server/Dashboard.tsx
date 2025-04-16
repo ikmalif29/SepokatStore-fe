@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import SideBarAdmin from "../../components/SideBarAdmin";
 import { motion, AnimatePresence, useMotionValue, Variants } from "framer-motion";
@@ -14,6 +15,7 @@ import {
   RadialLinearScale,
 } from "chart.js";
 import { Doughnut, Bar, Line, Radar } from "react-chartjs-2";
+import { JSX } from "react/jsx-runtime";
 
 // Register Chart.js components
 ChartJS.register(
@@ -483,11 +485,18 @@ const Dashboard = () => {
 
         <div className={`${height} w-full relative`}>
           {chartType === "doughnut" && (
-            <Doughnut data={data} options={chartOptions} />
+              <Doughnut data={data} options={chartOptions}/>
           )}
-          {chartType === "bar" && <Bar data={data} options={chartOptions} />}
-          {chartType === "line" && <Line data={data} options={chartOptions} />}
-          {chartType === "radar" && <Radar data={data} options={chartOptions} />}
+          {chartType === "bar" &&
+            <Bar data={data}  options={chartOptions} />
+          }
+          {chartType === "line" &&
+
+            <Line data={data} options={chartOptions} />
+          }
+          {chartType === "radar" &&
+            <Radar data={data} options={chartOptions} />
+          }
 
           {/* Interactive glow effect on hover */}
           <motion.div
