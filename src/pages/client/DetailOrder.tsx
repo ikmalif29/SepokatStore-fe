@@ -30,6 +30,7 @@ const OrderCard: React.FC<{ order: OrderDetailPageProps }> = ({ order }) => {
   const isDelivered = currentDate.getTime() - createdDate.getTime() >= oneDayInMs;
   const status = isDelivered ? "Selesai Dikirim" : "Dikirim";
 
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -45,7 +46,7 @@ const OrderCard: React.FC<{ order: OrderDetailPageProps }> = ({ order }) => {
             className="w-24 h-24 object-cover rounded-lg"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}
-            onError={(e) => (e.target.src = "/fallback-image.jpg")}
+            // onError={(e) => (e.target.src = "/fallback-image.jpg")}
           />
           <div className="flex-1">
             <h3 className="text-xl font-semibold text-gray-900">

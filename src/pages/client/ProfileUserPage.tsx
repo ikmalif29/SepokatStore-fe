@@ -75,7 +75,7 @@ const ProfileUserPage = () => {
         setLoading(true);
         const response = localStorage.getItem("userLogin");
         if (response) {
-          const parsedData = JSON.parse(response);
+          const parsedData: User = JSON.parse(response);
           setUser(parsedData);
           setFormData((prev) => ({
             ...prev,
@@ -129,11 +129,11 @@ const ProfileUserPage = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
-    if (!validateForm()) return;
+    if (!validateForm() || !user) return;
     setUpdateLoading(true);
 
     try {
-      const updateData: any = {
+      const updateData: Partial<User> = {
         username: formData.username,
         email: formData.email,
       };
@@ -142,7 +142,7 @@ const ProfileUserPage = () => {
         updateData.currentPassword = formData.currentPassword;
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/update/${user?.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/update/${user.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData),
@@ -151,7 +151,14 @@ const ProfileUserPage = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Failed to update profile");
 
-      const updatedUser = { ...user, username: formData.username, email: formData.email };
+      // Ensure the updatedUser object includes all required User properties
+      const updatedUser: User = {
+        ...user, // Spread existing user to retain id, role, etc.
+        username: formData.username,
+        email: formData.email,
+        password: formData.newPassword || user.password, // Update password only if provided
+      };
+
       setUser(updatedUser);
       localStorage.setItem("userLogin", JSON.stringify(updatedUser));
       setSuccess("Profile updated successfully");

@@ -111,7 +111,7 @@ export const CartPage: React.FC = () => {
 
             if (!response.ok) throw new Error("Gagal mengupdate jumlah barang");
 
-            const updatedItem = await response.json();
+            // const updatedItem = await response.json();
 
             // Update the cart items in state
             const updatedCartItems = cartItems.map(item =>
