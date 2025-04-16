@@ -16,6 +16,8 @@ import {
 } from "chart.js";
 import { Doughnut, Bar, Line, Radar } from "react-chartjs-2";
 import { JSX } from "react/jsx-runtime";
+import { ChartOptions } from 'chart.js';
+
 
 // Register Chart.js components
 ChartJS.register(
@@ -175,7 +177,7 @@ const Dashboard = () => {
   };
 
   // Chart options
-  const chartOptions = {
+  const dougnutOptions : ChartOptions<'doughnut'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -218,7 +220,6 @@ const Dashboard = () => {
         beginAtZero: true,
         grid: {
           color: "rgba(255, 255, 255, 0.08)",
-          borderDash: [5, 5],
         },
         ticks: {
           color: "rgba(255, 255, 255, 0.7)",
@@ -229,7 +230,68 @@ const Dashboard = () => {
       x: {
         grid: {
           color: "rgba(255, 255, 255, 0.08)",
-          borderDash: [5, 5],
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: { family: "'Poppins', sans-serif", size: 12 },
+          padding: 10,
+        },
+      },
+    },
+  };
+  const radarOptions : ChartOptions<'radar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: "white",
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "'Poppins', sans-serif",
+          },
+          usePointStyle: true,
+          pointStyle: "circle",
+          padding: 20,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(17, 24, 39, 0.8)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
+        titleFont: {
+          size: 16,
+          weight: "bold",
+          family: "'Poppins', sans-serif",
+        },
+        bodyFont: {
+          size: 14,
+          family: "'Poppins', sans-serif",
+        },
+        borderWidth: 1,
+        padding: 15,
+        cornerRadius: 8,
+        displayColors: true,
+        usePointStyle: true,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: { family: "'Poppins', sans-serif", size: 12 },
+          padding: 10,
+        },
+      },
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
         },
         ticks: {
           color: "rgba(255, 255, 255, 0.7)",
@@ -252,6 +314,141 @@ const Dashboard = () => {
       },
     },
   };
+
+  const barOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: "white",
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "'Poppins', sans-serif",
+          },
+          usePointStyle: true,
+          pointStyle: "circle",
+          padding: 20,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(17, 24, 39, 0.8)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
+        titleFont: {
+          size: 16,
+          weight: "bold",
+          family: "'Poppins', sans-serif",
+        },
+        bodyFont: {
+          size: 14,
+          family: "'Poppins', sans-serif",
+        },
+        borderWidth: 1,
+        padding: 15,
+        cornerRadius: 8,
+        displayColors: true,
+        usePointStyle: true,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: { family: "'Poppins', sans-serif", size: 12 },
+          padding: 10,
+        },
+      },
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: { family: "'Poppins', sans-serif", size: 12 },
+          padding: 10,
+        },
+      },
+    },
+  };
+
+  const lineOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
+          // borderDash: [5, 5],
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: {
+            family: "'Poppins', sans-serif",
+            size: 12,
+          },
+          padding: 10,
+        },
+      },
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.08)",
+          // borderDash: [5, 5],
+        },
+        ticks: {
+          color: "rgba(255, 255, 255, 0.7)",
+          font: {
+            family: "'Poppins', sans-serif",
+            size: 12,
+          },
+          padding: 10,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "white",
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "'Poppins', sans-serif",
+          },
+          usePointStyle: true,
+          pointStyle: "circle",
+          padding: 20,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(17, 24, 39, 0.8)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
+        titleFont: {
+          size: 16,
+          weight: "bold",
+          family: "'Poppins', sans-serif",
+        },
+        bodyFont: {
+          size: 14,
+          family: "'Poppins', sans-serif",
+        },
+        borderWidth: 1,
+        padding: 15,
+        cornerRadius: 8,
+        displayColors: true,
+        usePointStyle: true,
+      },
+    },
+  };
+  
 
   // Animation variants
   const containerVariants: Variants = {
@@ -485,17 +682,17 @@ const Dashboard = () => {
 
         <div className={`${height} w-full relative`}>
           {chartType === "doughnut" && (
-              <Doughnut data={data} options={chartOptions}/>
+              <Doughnut data={data} options={dougnutOptions}/>
           )}
           {chartType === "bar" &&
-            <Bar data={data}  options={chartOptions} />
+            <Bar data={data}  options={barOptions} />
           }
           {chartType === "line" &&
 
-            <Line data={data} options={chartOptions} />
+            <Line data={data} options={lineOptions} />
           }
           {chartType === "radar" &&
-            <Radar data={data} options={chartOptions} />
+            <Radar data={data} options={radarOptions} />
           }
 
           {/* Interactive glow effect on hover */}

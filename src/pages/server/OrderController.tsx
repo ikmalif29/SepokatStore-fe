@@ -274,7 +274,7 @@ const OrderHistoryController: React.FC = () => {
                     ))}
                   </tr>
                 </thead>
-                <tbody Retrieved from the API response className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-200">
                   <AnimatePresence>
                     {orders.map((order, index) => (
                       <motion.tr
